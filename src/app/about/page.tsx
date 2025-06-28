@@ -10,7 +10,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import MailIcon from '@/assets/mail.svg';
 import GitHubIcon from '@/assets/github.svg';
-import {title, BeforeAnimationText, AnimationText, avatar, name, slogan, images, aboutMeP1, aboutMeP2, mainContactMeDescription, subContactMeDescription, mail, github, }
+import {title, BeforeAnimationText, AnimationText, name, slogan, images, aboutMeP1, aboutMeP2, mainContactMeDescription, subContactMeDescription, mail, github, }
 from '@/setting/AboutSetting';
 
 
@@ -196,7 +196,7 @@ export default function AboutPage() {
         {/* 底部装饰 */}
         <div className="text-center mt-8">
           <p className="text-gray-500 dark:text-gray-400 text-sm">
-            "代码如诗，技术如画，用心创造每一行代码"
+            &ldquo;代码如诗，技术如画，用心创造每一行代码&rdquo;
           </p>
         </div>
       </div>

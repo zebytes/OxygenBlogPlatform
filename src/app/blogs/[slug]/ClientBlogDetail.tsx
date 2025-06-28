@@ -11,8 +11,13 @@ import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import 'katex/dist/katex.min.css';
+
+interface ComponentProps {
+  children?: React.ReactNode;
+  [key: string]: any;
+}
 
 interface BlogPost {
   title: string;
@@ -113,7 +118,13 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                     rehypeSlug
                   ]}
                   components={{
-                     code({ node, inline, className, children, ...props }: any) {
+                     code({ node: _node, inline, className, children, ...props }: {
+                       node?: any;
+                       inline?: boolean;
+                       className?: string;
+                       children?: React.ReactNode;
+                       [key: string]: any;
+                     }) {
                        const match = /language-(\w+)/.exec(className || '');
                        const language = match ? match[1] : '';
                        
@@ -156,7 +167,7 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                          </code>
                        );
                      },
-                    blockquote({ children }: any) {
+                    blockquote({ children }: ComponentProps) {
                        return (
                          <blockquote className="border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 p-4 my-4 rounded-r-lg">
                            <div className="flex items-start">
@@ -166,7 +177,7 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                          </blockquote>
                        );
                      },
-                     table({ children }: any) {
+                     table({ children }: ComponentProps) {
                        return (
                          <div className="overflow-x-auto my-6">
                            <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600 rounded-lg">
@@ -175,49 +186,49 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                          </div>
                        );
                      },
-                     thead({ children }: any) {
+                     thead({ children }: ComponentProps) {
                        return (
                          <thead className="bg-gray-50 dark:bg-gray-800">
                            {children}
                          </thead>
                        );
                      },
-                     tbody({ children }: any) {
+                     tbody({ children }: ComponentProps) {
                        return (
                          <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                            {children}
                          </tbody>
                        );
                      },
-                     tr({ children }: any) {
+                     tr({ children }: ComponentProps) {
                        return (
                          <tr className="hover:bg-gray-50 dark:hover:bg-gray-800">
                            {children}
                          </tr>
                        );
                      },
-                     th({ children }: any) {
+                     th({ children }: ComponentProps) {
                        return (
                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-700">
                            {children}
                          </th>
                        );
                      },
-                     td({ children }: any) {
+                     td({ children }: ComponentProps) {
                         return (
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700">
                             {children}
                           </td>
                         );
                       },
-                      h1({ children }: any) {
+                      h1({ children }: ComponentProps) {
                        return (
                          <h1 className="text-3xl font-bold mt-8 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white no-underline">
                            {children}
                          </h1>
                        );
                      },
-                     h2({ children }: any) {
+                     h2({ children }: ComponentProps) {
                        return (
                          <h2 className="text-2xl font-semibold mt-6 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white no-underline">
                            {children}

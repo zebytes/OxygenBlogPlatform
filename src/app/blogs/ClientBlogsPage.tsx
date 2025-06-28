@@ -53,24 +53,8 @@ export default function ClientBlogsPage({ initialPosts }: ClientBlogsPageProps) 
   };
 
   /**
-   * 卡片动画配置
+   * 卡片动画配置 - 已内联到组件中
    */
-  const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20,
-      scale: 0.95
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
 
   // 如果没有任何博客数据，显示空页面提示
   if (initialPosts.length === 0) {
@@ -227,7 +211,7 @@ export default function ClientBlogsPage({ initialPosts }: ClientBlogsPageProps) 
             animate="visible"
           >
             <div className="grid gap-6 md:grid-cols-2">
-              {filteredPosts.map((post, index) => (
+              {filteredPosts.map((post, _index) => (
                 <motion.article
                   key={post.id}
                   variants={{
