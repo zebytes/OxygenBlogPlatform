@@ -4,8 +4,9 @@ import fs from 'fs';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string; path: string[] } }
+  context: { params: Promise<{ slug: string; path: string[] }> }
 ) {
+  const params = await context.params;
   try {
     const { slug, path: assetPath } = params;
     
