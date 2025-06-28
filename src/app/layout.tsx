@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { beianhao, ICP, year, name, aWord } from "@/setting/FooterSetting";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,9 +40,9 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
-          <footer className="bg-[#fcfdff] border-t border-gray-200/20 dark:border-gray-700/20 text-gray-600 dark:text-gray-400 py-3">
+          <footer className="bg-white/90 dark:bg-gray-900/90 border-t border-gray-200/20 dark:border-gray-700/20 text-gray-600 dark:text-gray-400 py-3">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <p>津公网安备xxxxxxx号 津ICP备xxxxx号 &copy;  2025 XuHaoyang  ·  Bright like a star</p>
+              <p>{} {} &copy;  {year} {name}  ·  {aWord}</p>
             </div>
           </footer>
         </ThemeProvider>

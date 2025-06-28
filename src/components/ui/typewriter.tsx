@@ -124,7 +124,7 @@ function BlinkingCursor() {
         },
       }}
       animate="blinking"
-      className="inline-block h-5 w-[1px] translate-y-1 bg-neutral-900"
+      className="inline-block h-8 w-[1px] translate-y-1 bg-neutral-900"
     />
   )
 }
