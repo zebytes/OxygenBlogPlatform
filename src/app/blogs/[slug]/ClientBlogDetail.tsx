@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -12,6 +13,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 import 'katex/dist/katex.min.css';
 
 interface ComponentProps {
@@ -33,6 +35,10 @@ interface ClientBlogDetailProps {
   blog: BlogPost;
 }
 
+interface LinkProps {
+  href?: string;
+  children?: React.ReactNode;
+}
 /**
  * 博客详情客户端组件
  * 
@@ -118,53 +124,98 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                     rehypeSlug
                   ]}
                   components={{
-                     code({ node: _node, inline, className, children, ...props }: {
-                       node?: any;
+                     p({ children, ...props }: ComponentProps) {
+                       return (
+                         <p className="my-4 leading-relaxed text-gray-700 dark:text-gray-300" {...props}>
+                           {children}
+                         </p>
+                       );
+                     },
+                     pre: ({ children, ...props }: ComponentProps) => (
+                       <pre {...props} className="relative group my-6 bg-gray-800 dark:bg-gray-900 rounded-lg text-sm p-0 overflow-hidden">
+                         {children}
+                       </pre>
+                     ),
+                     code({ inline, className, children, ...props }: {
                        inline?: boolean;
                        className?: string;
                        children?: React.ReactNode;
                        [key: string]: any;
                      }) {
+                       // 提取纯文本内容，避免复杂的React元素结构
+                        const getTextContent = (node: React.ReactNode): string => {
+                          if (typeof node === 'string') return node;
+                          if (typeof node === 'number') return String(node);
+                          if (Array.isArray(node)) return node.map(getTextContent).join('');
+                          if (node && typeof node === 'object' && 'props' in node) {
+                            const reactElement = node as React.ReactElement<{ children?: React.ReactNode }>;
+                            return getTextContent(reactElement.props.children);
+                          }
+                          return '';
+                        };
+
+                       const textContent = getTextContent(children);
                        const match = /language-(\w+)/.exec(className || '');
-                       const language = match ? match[1] : '';
-                       
-                       if (!inline && language) {
+                       const language = match ? match[1] : 'text';
+                       const codeContent = textContent.replace(/\n$/, '');
+
+                       // 智能判断行内代码：
+                       // 1. 明确标记为inline的
+                       // 2. 没有语言类名、内容简短且不包含换行符的（真正的行内代码）
+                       // 3. 排除无语言代码块：即使没有className，如果内容包含换行符或来自pre标签，则为块级代码
+                       const hasLanguageClass = className && className.startsWith('language-');
+                       const isShortContent = codeContent.length < 100 && !codeContent.includes('\n');
+                       const isInlineCode = inline || (!hasLanguageClass && !className && isShortContent);
+
+                       // 行内代码：只渲染纯文本，不包含任何块级元素
+                       if (isInlineCode) {
                          return (
-                           <div className="relative group">
-                             <div className="flex items-center justify-between bg-gray-800 dark:bg-gray-900 text-gray-300 px-4 py-2 text-sm rounded-t-lg">
-                               <span className="font-medium">{language}</span>
-                               <button
-                                 onClick={() => {
-                                   navigator.clipboard.writeText(String(children).replace(/\n$/, ''));
-                                 }}
-                                 className="opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-xs"
-                                 title="复制代码"
-                               >
-                                 复制
-                               </button>
-                             </div>
-                             <SyntaxHighlighter
-                               style={oneDark}
-                               language={language}
-                               PreTag="div"
-                               customStyle={{
-                                 margin: 0,
-                                 borderTopLeftRadius: 0,
-                                 borderTopRightRadius: 0,
-                                 borderBottomLeftRadius: '0.5rem',
-                                 borderBottomRightRadius: '0.5rem'
-                               }}
-                             >
-                               {String(children).replace(/\n$/, '')}
-                             </SyntaxHighlighter>
-                           </div>
+                           <code 
+                             className="font-mono text-sm bg-gray-50 dark:bg-gray-800/50 text-rose-600 dark:text-rose-400 px-1.5 py-0.5 rounded-sm inline" 
+                             {...props}
+                           >
+                             {textContent}
+                           </code>
                          );
                        }
-                       
+
+                       // 块级代码：包含语法高亮和UI元素
                        return (
-                         <code className={className} {...props}>
-                           {children}
-                         </code>
+                         <div className="relative">
+                           {/* 代码块头部 - 包含语言标签和复制按钮 */}
+                           <div className="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-t-lg border-b border-gray-700">
+                             <span className="text-xs text-gray-300 font-medium select-none">
+                               {language || 'text'}
+                             </span>
+                             <button
+                               onClick={() => navigator.clipboard.writeText(codeContent)}
+                               className="text-gray-300 hover:text-white bg-gray-700 hover:bg-gray-600 p-1.5 rounded-md transition-colors duration-200"
+                               title="复制代码"
+                             >
+                               <ClipboardIcon className="w-4 h-4" />
+                             </button>
+                           </div>
+                           <SyntaxHighlighter
+                             style={oneDark}
+                             language={language}
+                             PreTag="code"
+                             customStyle={{
+                               margin: 0,
+                               padding: '1.25rem',
+                               backgroundColor: 'transparent',
+                               borderRadius: '0 0 0.5rem 0.5rem',
+                               fontSize: '0.875rem',
+                               display: 'block',
+                             }}
+                             codeTagProps={{
+                               style: {
+                                 fontFamily: 'var(--font-mono)',
+                               },
+                             }}
+                           >
+                             {codeContent}
+                           </SyntaxHighlighter>
+                         </div>
                        );
                      },
                     blockquote({ children }: ComponentProps) {
@@ -284,23 +335,16 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                          </li>
                        );
                      },
-                     a({ href, children }: any) {
+                     a({ href, children }: LinkProps) {
                        return (
                          <a 
-                           href={href}
+                           href={href as string}
                            className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-2 underline-offset-2 transition-colors"
                            target={href?.startsWith('http') ? '_blank' : '_self'}
                            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                          >
                            {children}
                          </a>
-                       );
-                     },
-                     p({ children }: any) {
-                       return (
-                         <p className="my-4 leading-relaxed text-gray-700 dark:text-gray-300">
-                           {children}
-                         </p>
                        );
                      }
                   }}

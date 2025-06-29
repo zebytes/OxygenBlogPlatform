@@ -18,6 +18,18 @@ interface BlogPost {
 }
 
 /**
+ * 博客前置元数据接口
+ */
+interface BlogFrontMatter {
+  title?: string;
+  excerpt?: string;
+  date?: string;
+  category?: string;
+  tags?: string[];
+  readTime?: number;
+}
+
+/**
  * 获取所有博客文章
  */
 function getAllBlogs(): BlogPost[] {
@@ -42,16 +54,17 @@ function getAllBlogs(): BlogPost[] {
           try {
             const fileContent = fs.readFileSync(indexPath, 'utf8');
             const { data } = matter(fileContent);
+            const frontMatter = data as BlogFrontMatter;
             
             blogPosts.push({
               id: item,
-              title: data.title || '无标题',
-              excerpt: data.excerpt || '',
-              date: data.date || '2024-01-01',
-              category: data.category || '其他',
-              tags: data.tags || [],
+              title: frontMatter.title || '无标题',
+              excerpt: frontMatter.excerpt || '',
+              date: frontMatter.date || '2024-01-01',
+              category: frontMatter.category || '其他',
+              tags: frontMatter.tags || [],
               slug: item,
-              readTime: data.readTime || 5
+              readTime: frontMatter.readTime || 5
             });
           } catch (error) {
             console.error(`Error reading blog folder ${item}:`, error);
@@ -62,18 +75,19 @@ function getAllBlogs(): BlogPost[] {
         try {
           const fileContent = fs.readFileSync(itemPath, 'utf8');
           const { data } = matter(fileContent);
+          const frontMatter = data as BlogFrontMatter;
           
           const slug = item.replace('.md', '');
           
           blogPosts.push({
             id: slug,
-            title: data.title || '无标题',
-            excerpt: data.excerpt || '',
-            date: data.date || '2024-01-01',
-            category: data.category || '其他',
-            tags: data.tags || [],
+            title: frontMatter.title || '无标题',
+            excerpt: frontMatter.excerpt || '',
+            date: frontMatter.date || '2024-01-01',
+            category: frontMatter.category || '其他',
+            tags: frontMatter.tags || [],
             slug: slug,
-            readTime: data.readTime || 5
+            readTime: frontMatter.readTime || 5
           });
         } catch (error) {
           console.error(`Error reading blog file ${item}:`, error);

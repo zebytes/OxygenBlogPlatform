@@ -130,7 +130,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <Image src={MailIcon} alt="Mail" width={24} height={24} className="text-white" />
+                      <Image src={MailIcon as string} alt="Mail" width={24} height={24} className="text-white" />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-800 dark:text-white text-center mb-2">
                       邮箱联系
@@ -161,7 +161,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-700/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-600 dark:to-gray-700 rounded-lg mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <Image src={GitHubIcon} alt="GitHub" width={24} height={24} className="text-gray-800 dark:text-white" />
+                      <Image src={GitHubIcon as string} alt="GitHub" width={24} height={24} className="text-gray-800 dark:text-white" />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-800 dark:text-white text-center mb-2">
                       GitHub

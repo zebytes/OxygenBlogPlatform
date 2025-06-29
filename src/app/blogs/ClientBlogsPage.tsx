@@ -211,7 +211,7 @@ export default function ClientBlogsPage({ initialPosts }: ClientBlogsPageProps) 
             animate="visible"
           >
             <div className="grid gap-6 md:grid-cols-2">
-              {filteredPosts.map((post, _index) => (
+              {filteredPosts.map((post) => (
                 <motion.article
                   key={post.id}
                   variants={{

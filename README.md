@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Oxyegn Blog Platform
+本项目是一个基于 NEXT.js 制作的一个美观、配置方便、简洁的博客平台，目前为 V1.0.0 版本，后续会根据需求进行更新。
 
-## Getting Started
+## 功能
+- 支持 Markdown 格式的博客文章
+- 支持分类功能
+- 支持自定义导航栏、侧边栏、页脚等
+- 支持深色模式
 
-First, run the development server:
-
+## 如何配置 (本地)
+1. git clone 到本地
+2. 安装依赖
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+3. 运行项目
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 博客存放位置
+博客存放在`src/content/blogs`文件夹中，需要遵循一定的规范
+1. 文件名不能为中文
+2. 如果没有图片资源，可以把blog的markdown文件直接放在blogs文件夹中
+3. 如果有图片资源，需要放在`src/content/blogs/images`文件夹中
+```text
+blog-name/
+├── index.md          # 博客内容
+└── assets/           # 图片资源
+    ├── image1.jpg
+    └── image2.png
+```
+4. 博客需要命名为index.md
+5. 博客的元数据需要遵循如下规范
+```text
+---
+title: "这里是标题"
+date: "2024-01-15"
+category: "这里是分类"
+tags: ["Markdown", "渲染", "展示"]
+readTime: 8
+excerpt: "展示博客平台强大的 Markdown 渲染能力，包括代码高亮、数学公式、表格等丰富功能。" //这里是预览内容
+---
+```
+# 感谢您的使用，在使用过程中遇到任何问题都可以联系开发者

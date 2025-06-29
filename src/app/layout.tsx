@@ -42,7 +42,7 @@ export default function RootLayout({
           </main>
           <footer className="bg-white/90 dark:bg-gray-900/90 border-t border-gray-200/20 dark:border-gray-700/20 text-gray-600 dark:text-gray-400 py-3">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <p>{} {} &copy;  {year} {name}  ·  {aWord}</p>
+              <p>{beianhao} {ICP} &copy;  {year} {name}  ·  {aWord}</p>
             </div>
           </footer>
         </ThemeProvider>

@@ -1,78 +1,211 @@
 ---
-title: "博客图片功能演示"
-excerpt: "展示新的文件夹结构和图片解析功能"
+title: "Markdown 渲染效果展示"
 date: "2024-01-15"
-category: "技术"
-tags: ["演示", "图片", "Markdown"]
-readTime: 3
+category: "技术分享"
+tags: ["Markdown", "渲染", "展示"]
+readTime: 8
+excerpt: "展示博客平台强大的 Markdown 渲染能力，包括代码高亮、数学公式、表格等丰富功能。"
 ---
 
-# 博客图片功能演示
+# Markdown 渲染效果展示
 
-这是一个演示新的博客文件夹结构和图片解析功能的示例文章。
+这篇文章展示了我们博客平台强大的 Markdown 渲染能力。让我们一起来看看各种元素的渲染效果！ 🚀
 
-## 新的文件夹结构
+## 代码高亮
 
-现在每个博客文章都可以使用文件夹形式存储：
+### JavaScript 代码
 
+```javascript
+// React 函数组件示例
+const BlogPost = ({ title, content }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+    console.log('组件已挂载');
+    return () => console.log('组件将卸载');
+  }, []);
+  
+  return (
+    <article className="blog-post">
+      <h1>{title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    </article>
+  );
+};
+
+export default BlogPost;
 ```
-blog-name/
-├── index.md          # 博客内容
-└── assets/           # 图片资源
-    ├── image1.jpg
-    └── image2.png
+
+### Python 代码
+
+```python
+# 数据分析示例
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+def analyze_data(data_path):
+    """分析数据并返回统计信息"""
+    df = pd.read_csv(data_path)
+    
+    # 基本统计信息
+    stats = {
+        'shape': df.shape,
+        'missing_values': df.isnull().sum(),
+        'data_types': df.dtypes
+    }
+    
+    return stats
+
+# 使用示例
+if __name__ == "__main__":
+    result = analyze_data('data.csv')
+    print(f"数据形状: {result['shape']}")
 ```
 
-## 图片功能
+### SQL 查询
 
-在 Markdown 中，你可以使用相对路径引用图片：
-
-```markdown
-![示例图片](./example.svg)
-![另一张图片](assets/another.png)
+```sql
+-- 复杂查询示例
+SELECT 
+    u.username,
+    COUNT(p.id) as post_count,
+    AVG(p.view_count) as avg_views,
+    MAX(p.created_at) as last_post_date
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+WHERE u.created_at >= '2024-01-01'
+GROUP BY u.id, u.username
+HAVING COUNT(p.id) > 5
+ORDER BY avg_views DESC
+LIMIT 10;
 ```
 
-系统会自动将这些路径转换为正确的 API 路径。
+## 数学公式
 
-### 示例图片展示
+### 行内公式
 
-![博客图片演示](./example.svg)
+这是一个行内公式：$E = mc^2$，爱因斯坦的质能方程。
 
-上面是一个 SVG 格式的示例图片，展示了新的图片解析功能。
+### 块级公式
 
-## 链接样式测试
+二次方程的解：
 
-这里有一些链接测试：
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
-- [内部链接](/blogs)
-- [外部链接](https://github.com)
-- [另一个外部链接](https://nextjs.org)
+傅里叶变换：
 
-## 列表功能测试
+$$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt$$
 
-### 有序列表
 
-1. 第一项内容，这里应该能正常显示文字
-2. 第二项内容，测试列表样式
-3. 第三项内容，包含更多文字来测试换行效果
+## 表格展示
+
+### 技术栈对比
+
+| 框架 | 语言 | 性能 | 学习曲线 | 生态系统 | 推荐指数 |
+|------|------|------|----------|----------|----------|
+| React | JavaScript | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Vue.js | JavaScript | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Angular | TypeScript | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Svelte | JavaScript | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
+
+### 项目进度表
+
+| 阶段 | 开始日期 | 结束日期 | 状态 | 负责人 |
+|------|----------|----------|------|--------|
+| 需求分析 | 2024-01-01 | 2024-01-07 | ✅ 完成 | 张三 |
+| UI 设计 | 2024-01-08 | 2024-01-15 | ✅ 完成 | 李四 |
+| 前端开发 | 2024-01-16 | 2024-02-15 | 🔄 进行中 | 王五 |
+| 后端开发 | 2024-01-20 | 2024-02-20 | ⏳ 待开始 | 赵六 |
+| 测试部署 | 2024-02-21 | 2024-02-28 | ⏳ 待开始 | 全员 |
+
+## 引用块
+
+> 💡 **重要提示**
+> 
+> 这是一个重要的引用块。它可以用来突出显示重要信息、警告或者引用他人的话。
+> 
+> 引用块支持多行内容，并且可以包含其他 Markdown 元素。
+
+> 📚 **学习建议**
+> 
+> 在学习新技术时，建议采用以下步骤：
+> 1. 理解基本概念
+> 2. 动手实践
+> 3. 阅读官方文档
+> 4. 参与社区讨论
+
+## 列表
 
 ### 无序列表
 
-- 无序列表第一项
-- 无序列表第二项
-- 无序列表第三项，包含更多内容
+- 🎯 **目标明确**：设定清晰的学习目标
+- 📅 **计划合理**：制定可执行的学习计划
+- 💪 **持续练习**：通过实践巩固知识
+- 🤝 **交流分享**：与他人交流学习心得
+- 📈 **持续改进**：根据反馈调整学习方法
 
-## 段落测试
+### 有序列表
 
-这是一个普通段落，用来测试段落的样式和间距。段落应该有合适的行高和间距，让阅读体验更好。
+1. 准备阶段
+   - 确定学习目标
+   - 收集学习资料
+   - 制定时间计划
 
-这是另一个段落，用来测试段落之间的间距是否合适。
+2. **学习阶段**
+   - 理论学习
+   - 实践操作
+   - 问题记录
+
+3. **巩固阶段**
+   - 知识总结
+   - 项目实战
+   - 经验分享
+
+## 任务列表
+
+- [x] 完成 Markdown 渲染器优化
+- [x] 添加代码高亮功能
+- [x] 支持数学公式渲染
+- [ ] 添加图片懒加载
+- [ ] 实现全文搜索
+- [ ] 优化移动端体验
+
+## 链接和图片
+
+这里有一些有用的链接：
+
+- [React 官方文档](https://react.dev/)
+- [Next.js 文档](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- ![博客图片演示](./example.svg)
+
+## 分隔线
+
+---
+
+## 行内代码
+
+在 JavaScript 中，你可以使用 `const` 关键字声明常量，使用 `let` 声明变量。React 组件通常使用 `useState` 和 `useEffect` 钩子来管理状态和副作用。
+
+## Emoji 支持
+
+我们的博客平台支持 emoji！ :smile: :rocket: :heart: 
+
+你可以使用各种 emoji 来让文章更生动：
+- 技术相关：:computer: :gear: :wrench: :hammer:
+- 情感表达：:joy: :thinking: :confused: :relieved:
+- 状态指示：:white_check_mark: :x: :warning: :information_source:
 
 ## 总结
 
-新的博客系统现在支持：
+通过这篇文章，我们展示了博客平台强大的 Markdown 渲染能力：
 
-1. 文件夹形式的博客存储
-2. 图片资源的自动解析
-3. 改进的 Markdown 渲染样式
-4. 更好的链接和列表显示效果
+1. **代码高亮**：支持多种编程语言的语法高亮
+2. **数学公式**：支持 LaTeX 格式的数学公式渲染
+3. **表格**：美观的表格样式和响应式设计
+4. **引用块**：带有图标的美化引用块
+5. **列表**：支持有序、无序和任务列表
+6. **Emoji**：丰富的表情符号支持
+
+这些功能让我们能够创建更加丰富和专业的技术博客内容！ 🎉
