@@ -459,40 +459,40 @@ export function ClientBlogDetail({ blog }: ClientBlogDetailProps) {
                          </h2>
                        );
                      },
-                     h3({ children }: any) {
+                     h3({ children }: { children: React.ReactNode }) {
                        const id = typeof children === 'string' ? 
                          children.toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') :
-                         React.Children.toArray(children).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                         React.Children.toArray(children as React.ReactNode[]).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                        return (
                          <h3 id={id} className="text-xl font-semibold mt-5 mb-2 text-gray-900 dark:text-white no-underline">
                            {children}
                          </h3>
                        );
                      },
-                     h4({ children }: any) {
+                     h4({ children }: { children: React.ReactNode }) {
                        const id = typeof children === 'string' ? 
                          children.toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') :
-                         React.Children.toArray(children).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                         React.Children.toArray(children as React.ReactNode[]).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                        return (
                          <h4 id={id} className="text-lg font-semibold mt-4 mb-2 text-gray-900 dark:text-white no-underline">
                            {children}
                          </h4>
                        );
                      },
-                     h5({ children }: any) {
+                     h5({ children }: { children: React.ReactNode }) {
                        const id = typeof children === 'string' ? 
                          children.toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') :
-                         React.Children.toArray(children).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                         React.Children.toArray(children as React.ReactNode[]).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                        return (
                          <h5 id={id} className="text-base font-semibold mt-3 mb-2 text-gray-900 dark:text-white no-underline">
                            {children}
                          </h5>
                        );
                      },
-                     h6({ children }: any) {
+                     h6({ children }: { children: React.ReactNode }) {
                        const id = typeof children === 'string' ? 
                          children.toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') :
-                         React.Children.toArray(children).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                         React.Children.toArray(children as React.ReactNode[]).join('').toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                        return (
                          <h6 id={id} className="text-sm font-semibold mt-3 mb-2 text-gray-900 dark:text-white no-underline">
                            {children}

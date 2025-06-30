@@ -135,7 +135,7 @@ async function getBlogContent(slug: string): Promise<BlogPost | null> {
       return null;
     }
     
-    const { filePath, relativePath } = fileInfo;
+    const { filePath } = fileInfo;
     
     // 读取文件内容，使用 UTF-8 编码处理中文
     const fileContent = fs.readFileSync(filePath, 'utf8');
