@@ -5,7 +5,7 @@ export const AnimationText = "进步"; //动画字
  * 头像配置，自动处理basePath
  * 需要存放在public文件夹中
  */
-const AVATAR_FILENAME = "avatar.jpg";
+const AVATAR_FILENAME = "艾拉.png";
 
 /**
  * 获取头像完整路径，正确处理basePath
@@ -19,29 +19,32 @@ export const getAvatarPath = (): string => {
 // 向后兼容的导出，建议使用 getAvatarPath() 函数
 export const avatar = getAvatarPath();
 
-export const isBorder = true; //控制头像边框是否显示
-export const name = "XHY"; //名字
+export const isBorder = false; //控制头像边框是否显示
+export const name = "WZ"; //名字
 export const slogan =
   "在技术的海洋中探索，在代码的世界里创造，用文字记录成长的足迹"; //个人介绍
 //https://simpleicons.org 图标配置 图云
 const slugs = [
-  "typescript",
-  "javascript",
-  "react",
-  "vuedotjs",
-  "Vite",
-  "html5",
-  "css",
-  "Vitest",
-  "ESLint",
-  "Prettier",
-  "C",
-  "C++",
-  "nodedotjs",
-  "nextdotjs",
-  "git",
-  "github",
-  "gitlab",
+    "MySQL",
+    "Redis",
+    "MinIO",
+    "ApacheCassandra",
+    "ApacheRocketMQ",
+    "ApacheKafka",
+    "ApacheJMeter",
+    "Spring",
+    "SpringBoot",
+    "SpringSecurity",
+    "Go",
+    "C",
+    "Gin",
+    "Kotlin",
+
+
+    "Docker",
+    "Prometheus",
+    "Grafana",
+    "git",
 ];
 /*
   关于技术栈图云配置说明
@@ -60,10 +63,10 @@ export const images = slugs.map(
 //   "https://images.unsplash.com/photo-1720048171230-c60d162f93a0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 //   "/avatar.jpg",
 // ];
-export const aboutMeP1 = "天津理工大学计算机科学与技术专业就读，2027年毕业 "; //关于我页面第一段
+export const aboutMeP1 = "天津理工大学信息安全专业，2027年毕业 "; //关于我页面第一段
 export const aboutMeP2 = "热爱技术，热爱生活，希望自己能创造更多价值 "; //关于我页面第一段
 export const mainContactMeDescription =
   "如果你对我的文章感兴趣，或者想要交流技术话题，欢迎与我联系！"; //联系我页面描述
 export const subContactMeDescription = "我会尽快回复你的消息 ✨"; //联系我页面补充描述
-export const mail = "mailto:haoyang05.xu@gmail.com"; //邮箱配置
-export const github = "https://github.com/seasalt-haiyan"; //github配置
+export const mail = "ze.bytes@outlook.com"; //邮箱配置
+export const github = "https://zebytes.github.io/"; //github配置

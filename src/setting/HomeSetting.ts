@@ -1,9 +1,25 @@
-export const mainTitle = "0xygen Blog"; //主标题
+export const mainTitle = "Grocery Store"; //主标题
 export const mainTitleBlueDecoration = "."; //主题色装饰字
-export const subTitle = "A Front-End "; //副标题
-export const subTitleBlueDecoration = "Developer"; //副标题主题色装饰字
+export const subTitle = ""; //副标题
+export const subTitleBlueDecoration = ""; //副标题主题色装饰字
 export const TypewriterTexts = [
-  //打字机动画轮播数组
-  "悟以往之不谏，知来者之可追",
-  "JavaScript是最好的语言!",
+    //打字机动画轮播数组
+    "人生若只如初见，何事秋风悲画扇",
+    "溪花与禅意，相对亦忘言",
+    "疏影横斜水清浅，暗香浮动月黄昏",
+    "小楼一夜听春雨，深巷明朝卖杏花",
+    "落花人独立，微雨燕双飞",
+    "云想衣裳花想容，春风拂槛露华浓",
+    "天阶夜色凉如水，坐看牵牛织女星",
+    "沾衣欲湿杏花雨，吹面不寒杨柳风",
+    "水晶帘动微风起，满架蔷薇一院香",
+    "梨花院落溶溶月，柳絮池塘淡淡风",
+    "一川烟草，满城风絮，梅子黄时雨",
+    "春水碧于天，画船听雨眠",
+    "叶上初阳干宿雨，水面清圆，一一风荷举",
+    "山光悦鸟性，潭影空人心",
+    "细雨鱼儿出，微风燕子斜",
+    "荷风送香气，竹露滴清响",
+    "空山新雨后，天气晚来秋",
+    "人闲桂花落，夜静春山空"
 ];
