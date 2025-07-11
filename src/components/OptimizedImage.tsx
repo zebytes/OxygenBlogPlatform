@@ -1,8 +1,44 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
+
+/**
+ * 判断是否为外部图片链接
+ */
+function isExternalImage(src: string): boolean {
+  return src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//');
+}
+
+/**
+ * 处理图片路径，正确添加basePath支持
+ * 对于外部图片使用Next.js Image组件，对于本地图片需要手动添加basePath
+ */
+function processImagePath(src: string): string {
+  // 如果是外部链接，直接返回
+  if (isExternalImage(src)) {
+    return src;
+  }
+  
+  // 获取basePath
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  
+  // 如果是相对路径（如 ./assets/example.svg 或 ../assets/example.svg），转换为绝对路径
+  if (src.startsWith('./') || src.startsWith('../')) {
+    // 移除相对路径前缀，转换为从public目录开始的路径
+    const cleanPath = src.replace(/^\.\.?\//, '');
+    return basePath ? `${basePath}/${cleanPath}` : `/${cleanPath}`;
+  }
+  
+  // 如果已经是绝对路径（以/开头），添加basePath
+  if (src.startsWith('/')) {
+    return basePath ? `${basePath}${src}` : src;
+  }
+  
+  // 其他情况，假设是相对于public目录的路径
+  return basePath ? `${basePath}/${src}` : `/${src}`;
+}
 
 interface OptimizedImageProps {
   src: string;
@@ -28,6 +64,20 @@ export default function OptimizedImage({
   const [isInView, setIsInView] = useState(priority); // 优先级图片默认可见
   const [isMounted, setIsMounted] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
+  
+  // 防止重复请求的状态管理
+  const loadingStateRef = useRef<'idle' | 'loading' | 'loaded' | 'error'>('idle');
+
+  // 使用 useMemo 缓存处理后的图片路径和外部链接判断，避免重复计算
+  const processedSrc = useMemo(() => processImagePath(src), [src]);
+  const isExternal = useMemo(() => isExternalImage(src), [src]);
+  
+  // 重置加载状态当图片源改变时
+  useEffect(() => {
+    loadingStateRef.current = 'idle';
+    setIsLoaded(false);
+    setHasError(false);
+  }, [processedSrc]);
 
   // 确保组件已挂载，避免水合不匹配
   useEffect(() => {
@@ -36,8 +86,12 @@ export default function OptimizedImage({
 
   // 使用 Intersection Observer 实现懒加载
   useEffect(() => {
-    if (!imgRef.current || priority) {
-      setIsInView(true);
+    // 如果是优先级图片，直接返回，不需要观察器
+    if (priority) {
+      return;
+    }
+
+    if (!imgRef.current) {
       return;
     }
 
@@ -58,8 +112,6 @@ export default function OptimizedImage({
 
     return () => observer.disconnect();
   }, [priority]);
-
-  const isExternal = src.startsWith('http');
 
   // 服务端渲染时返回简单占位符，避免水合不匹配
   if (!isMounted) {
@@ -129,19 +181,34 @@ export default function OptimizedImage({
         >
           {isExternal ? (
             <img
-              src={src}
+              src={processedSrc}
               alt={alt}
               title={title}
               loading={priority ? 'eager' : 'lazy'}
               className="w-full h-auto object-contain"
               style={{ maxHeight: '600px' }}
-              onLoad={() => setIsLoaded(true)}
-              onError={() => setHasError(true)}
+              onLoad={() => {
+                if (loadingStateRef.current === 'idle' || loadingStateRef.current === 'loading') {
+                  loadingStateRef.current = 'loaded';
+                  setIsLoaded(true);
+                }
+              }}
+              onError={() => {
+                if (loadingStateRef.current === 'idle' || loadingStateRef.current === 'loading') {
+                  loadingStateRef.current = 'error';
+                  setHasError(true);
+                }
+              }}
+              onLoadStart={() => {
+                if (loadingStateRef.current === 'idle') {
+                  loadingStateRef.current = 'loading';
+                }
+              }}
               decoding="async"
             />
           ) : (
             <Image
-              src={src}
+              src={processedSrc}
               alt={alt}
               title={title}
               width={width}
@@ -152,8 +219,23 @@ export default function OptimizedImage({
               priority={priority}
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-              onLoad={() => setIsLoaded(true)}
-              onError={() => setHasError(true)}
+              onLoad={() => {
+                if (loadingStateRef.current === 'idle' || loadingStateRef.current === 'loading') {
+                  loadingStateRef.current = 'loaded';
+                  setIsLoaded(true);
+                }
+              }}
+              onError={() => {
+                if (loadingStateRef.current === 'idle' || loadingStateRef.current === 'loading') {
+                  loadingStateRef.current = 'error';
+                  setHasError(true);
+                }
+              }}
+              onLoadStart={() => {
+                if (loadingStateRef.current === 'idle') {
+                  loadingStateRef.current = 'loading';
+                }
+              }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
             />
           )}
