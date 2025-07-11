@@ -1,4 +1,4 @@
-export const categories = ["all", "技术", "开发", "配置", "其他"];
+export const categories = ["all", "技术", "开发", "配置", "其他"] as const;
 //以下两个配置项如无需求，无须改动
 /**
  * CC 协议类型
