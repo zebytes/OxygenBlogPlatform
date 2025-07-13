@@ -158,7 +158,7 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt$$
 ### 有序列表
 
 1. 准备阶段
-   - 确定学习目标
+   - 确定学习目标 长度测试salkdjlakjldjasldjalsjdlkasjdlasjldkjaslkjdlkasjdlkjasldjlkasjdklasjlkdjas
    - 收集学习资料
    - 制定时间计划
 
@@ -188,7 +188,7 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt$$
 - [React 官方文档](https://react.dev/)
 - [Next.js 文档](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
-- ![博客图片演示](../assets/example.svg)
+- ![博客图片演示](/assets/example.svg)
 
 ## 分隔线
 
@@ -197,6 +197,8 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt$$
 ## 行内代码
 
 在 JavaScript 中，你可以使用 `const` 关键字声明常量，使用 `let` 声明变量。React 组件通常使用 `useState` 和 `useEffect` 钩子来管理状态和副作用。
+
+`这是长度测试aksjdlasjdlkashdalsjdlkasjdlkasjdoiqwjlkasnxlkas`
 
 ## Emoji 支持
 
