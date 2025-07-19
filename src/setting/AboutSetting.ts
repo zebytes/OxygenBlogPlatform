@@ -65,6 +65,9 @@ export const images = slugs.map(
 //联系我页面配置
 export const aboutMeP1 = "天津理工大学信息安全专业，2027年毕业 "; //关于我页面第一段
 export const aboutMeP2 = "热爱技术，热爱生活，希望自己能创造更多价值 "; //关于我页面第一段
+
+export const aboutMeP3 = "";
+
 export const mainContactMeDescription =
   "如果你对我的文章感兴趣，或者想要交流技术话题，欢迎与我联系！"; //联系我页面主描述
 export const subContactMeDescription = "我会尽快回复你的消息 ✨"; //联系我页面补充描述
