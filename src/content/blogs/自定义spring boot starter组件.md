@@ -3,7 +3,6 @@ title: 自定义spring boot starter组件
 date: 2025-6-19 13:08:00
 tags: [Spring]
 category: 配置
-readTime: 5
 excerpt: 创建starter模块 添加所需依赖 创建config包 实现自动配置 创建META-INF及spring目录  接着，在 /main 文件夹下，创建 /resources 包，再创建 /META-INF 文件夹，再在里面创建 /spring 文件夹 , 以及 org.springframework.boot.autoconfigure.AutoConfiguration.imports 文件注意，这是自定义 starter 固定步骤
 ---
 

@@ -3,7 +3,6 @@ title: Docker配置Prometheus+Grafana监控，AlertManager告警通知
 date: 2025-6-18 11:57:14
 tags: [监控]
 category: 配置
-readTime: 10
 excerpt: 创建Prometheus容器   创建Grafana容器   监控Linux   配置Grafana可视化界面   监控多个Linux   监控Redis   配置告警
 ---
 # 环境
