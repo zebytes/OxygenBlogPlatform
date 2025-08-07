@@ -1,17 +1,9 @@
 ---
 title: 示例文章
-date: 2024-01-15
-category: 其他
+date: 2022-01-15
+category: 技术
 tags: ["Markdown", "渲染", "展示"]
-readTime: 8
 excerpt: 展示博客平台强大的 Markdown 渲染能力，包括代码高亮、数学公式、表格等丰富功能。
-reference: [
-  { description: "Next.js官方文档", link: "https://nextjs.org/docs" },
-  { description: "React官方文档", link: "https://reactjs.org/docs/getting-started.html" },
-  { description: "TypeScript官方文档", link: "https://www.typescriptlang.org/docs/" },
-  { description: "Tailwind CSS文档", link: "https://tailwindcss.com/docs" },
-  { description: "MDN Web文档", link: "https://developer.mozilla.org/zh-CN/" }
-]
 ---
 
 # Markdown 渲染效果展示
